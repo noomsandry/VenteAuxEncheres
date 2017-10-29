@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Element" table="element">
+    <indexes>
+      <index name="i_fk_element_examen" columns="numexam"/>
+    </indexes>
+    <id name="numelem" type="smallint" column="numelem">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nomelem" type="string" column="nomelem" length="32" nullable="false">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <one-to-many field="patElemCal" target-entity="PatElemCal" mapped-by="numelem" fetch="LAZY"/>
+    <many-to-one field="numexam" target-entity="Examen" fetch="LAZY">
+      <join-columns>
+        <join-column name="numexam" referenced-column-name="numexam"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="numgroupeelem" target-entity="GroupeElem" mapped-by="numelem" fetch="LAZY"/>
+  </entity>
+</doctrine-mapping>

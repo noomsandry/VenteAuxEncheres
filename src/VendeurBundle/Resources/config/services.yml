@@ -1,0 +1,4 @@
+services:
+#    vendeur.example:
+#        class: VendeurBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

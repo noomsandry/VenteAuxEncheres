@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Categanals list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nomcateganal</th>
+                <th>Numcateganal</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categAnal in categAnals %}
+            <tr>
+                <td><a href="{{ path('categanal_show', { 'numcateganal': categAnal.numcateganal }) }}">{{ categAnal.nomcateganal }}</a></td>
+                <td>{{ categAnal.numcateganal }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('categanal_show', { 'numcateganal': categAnal.numcateganal }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('categanal_edit', { 'numcateganal': categAnal.numcateganal }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('categanal_new') }}">Create a new categAnal</a>
+        </li>
+    </ul>
+{% endblock %}

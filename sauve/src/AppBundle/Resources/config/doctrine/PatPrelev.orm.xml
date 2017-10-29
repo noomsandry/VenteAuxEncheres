@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\PatPrelev" table="pat_prelev">
+    <indexes>
+      <index name="i_fk_pat_prelev_prelevement" columns="numprelev"/>
+      <index name="i_fk_pat_prelev_patient" columns="numpat,datepat"/>
+      <index name="IDX_C7B5BECD43D087B" columns="numpat"/>
+    </indexes>
+    <id name="datepat" type="date" column="datepat"/>
+    <many-to-one field="numprelev" target-entity="Prelevement" fetch="LAZY">
+      <join-columns>
+        <join-column name="numprelev" referenced-column-name="numprelev"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="numpat" target-entity="Patient" fetch="LAZY">
+      <join-columns>
+        <join-column name="numpat" referenced-column-name="numpat"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

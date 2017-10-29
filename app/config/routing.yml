@@ -1,0 +1,44 @@
+compte:
+    resource: "@CompteBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+admin:
+    resource: "@AdminBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+vendeur:
+    resource: "@VendeurBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+acheteur:
+    resource: "@AcheteurBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+pack:
+    resource: "@PackBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+membre:
+    resource: "@MembreBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+produit:
+    resource: "@ProduitBundle/Controller/ProduitController.php"
+    type: annotation
+
+categorie:
+    resource: "@ProduitBundle/Controller/CategorieController.php"
+    type: annotation
+
+api_login_check:
+    path: /login_check
+
+routing_rest:
+    resource: routing_rest.yml
+

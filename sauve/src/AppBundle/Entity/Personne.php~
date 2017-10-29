@@ -1,0 +1,94 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Personne
+ *
+ * @ORM\Table(name="personne", indexes={@ORM\Index(name="i_fk_personne_etablissement", columns={"numetab"})})
+ * @ORM\Entity
+ */
+class Personne
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nompers", type="string", length=32, nullable=false)
+     */
+    private $nompers;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prenompers", type="string", length=32, nullable=false)
+     */
+    private $prenompers;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="datenaispers", type="date", nullable=false)
+     */
+    private $datenaispers;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adressepers", type="string", length=32, nullable=true)
+     */
+    private $adressepers;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numpers", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $numpers;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Patient", mappedBy="numpers")
+     */
+    private $patient;
+
+    /**
+     * @var \AppBundle\Entity\Etablissement
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Etablissement")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="numetab", referencedColumnName="numetab")
+     * })
+     */
+    private $numetab;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\CategoriePers", inversedBy="numpers")
+     * @ORM\JoinTable(name="pers_categpers",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="numpers", referencedColumnName="numpers")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="numcategpers", referencedColumnName="numcategpers")
+     *   }
+     * )
+     */
+    private $numcategpers;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->patient = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->numcategpers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

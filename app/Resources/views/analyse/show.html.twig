@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Analyse</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Nomanal</th>
+                <td>{{ analyse.nomanal }}</td>
+            </tr>
+            <tr>
+                <th>Prixanal</th>
+                <td>{{ analyse.prixanal }}</td>
+            </tr>
+            <tr>
+                <th>Numanal</th>
+                <td>{{ analyse.numanal }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('analyse_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('analyse_edit', { 'numanal': analyse.numanal }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

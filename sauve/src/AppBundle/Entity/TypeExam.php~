@@ -1,0 +1,55 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TypeExam
+ *
+ * @ORM\Table(name="type_exam")
+ * @ORM\Entity
+ */
+class TypeExam
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nomtypeexam", type="string", length=32, nullable=false)
+     */
+    private $nomtypeexam;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numtypeexam", type="smallint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $numtypeexam;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Examen", inversedBy="numtypeexam")
+     * @ORM\JoinTable(name="exam_typexam",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="numtypeexam", referencedColumnName="numtypeexam")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="numexam", referencedColumnName="numexam")
+     *   }
+     * )
+     */
+    private $numexam;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->numexam = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

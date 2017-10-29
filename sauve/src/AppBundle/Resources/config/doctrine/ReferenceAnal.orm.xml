@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\ReferenceAnal" table="reference_anal">
+    <id name="numrefanal" type="smallint" column="numrefanal">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="libellerefanal" type="string" column="libellerefanal" length="32" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <many-to-many field="numanal" target-entity="Analyse" mapped-by="numrefanal" fetch="LAZY"/>
+  </entity>
+</doctrine-mapping>

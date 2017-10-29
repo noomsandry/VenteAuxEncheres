@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Cmdfrs list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Datecmdfrs</th>
+                <th>Numcmdfrs</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cmdfr in cmdfrs %}
+            <tr>
+                <td><a href="{{ path('cmdfrs_show', { 'numcmdfrs': cmdfr.numcmdfrs }) }}">{{ cmdfr.datecmdfrs|date('Y-m-d') }}</a></td>
+                <td>{{ cmdfr.numcmdfrs }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('cmdfrs_show', { 'numcmdfrs': cmdfr.numcmdfrs }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('cmdfrs_edit', { 'numcmdfrs': cmdfr.numcmdfrs }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('cmdfrs_new') }}">Create a new cmdfr</a>
+        </li>
+    </ul>
+{% endblock %}

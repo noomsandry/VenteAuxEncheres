@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Groupeanals list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nomgroupeanal</th>
+                <th>Nomanal</th>
+                <th>Prixanal</th>
+                <th>Numgroupeanal</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for groupeAnal in groupeAnals %}
+            <tr>
+                <td><a href="{{ path('groupeanal_show', { 'numgroupeanal': groupeAnal.numgroupeanal }) }}">{{ groupeAnal.nomgroupeanal }}</a></td>
+                <td>{{ groupeAnal.nomanal }}</td>
+                <td>{{ groupeAnal.prixanal }}</td>
+                <td>{{ groupeAnal.numgroupeanal }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('groupeanal_show', { 'numgroupeanal': groupeAnal.numgroupeanal }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('groupeanal_edit', { 'numgroupeanal': groupeAnal.numgroupeanal }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('groupeanal_new') }}">Create a new groupeAnal</a>
+        </li>
+    </ul>
+{% endblock %}

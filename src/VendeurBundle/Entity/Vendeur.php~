@@ -1,0 +1,51 @@
+<?php
+
+namespace VendeurBundle\Entity;
+
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Vendeur
+ *
+ * @ORM\Table(name="vendeur")
+ * @ORM\Entity(repositoryClass="VendeurBundle\Repository\VendeurRepository")
+ */
+class Vendeur
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    
+    /** @ORM\OneToOne(targetEntity="VendeurBundle\Entity\Magasin")
+      * @Serializer\Expose
+      *  @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+      * @Assert\Valid()
+    */
+    private $magasin;
+    
+     /** @ORM\OneToOne(targetEntity="MembreBundle\Entity\Membre")
+      * @Serializer\Expose
+      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+      * @Assert\Valid()
+    */
+    private $user;
+    
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}
+

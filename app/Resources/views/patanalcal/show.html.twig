@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Patanalcal</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Interpretation</th>
+                <td>{{ patAnalCal.interpretation }}</td>
+            </tr>
+            <tr>
+                <th>Germeidentifie</th>
+                <td>{{ patAnalCal.germeidentifie }}</td>
+            </tr>
+            <tr>
+                <th>Etudeantibio</th>
+                <td>{{ patAnalCal.etudeantibio }}</td>
+            </tr>
+            <tr>
+                <th>Resultatanal</th>
+                <td>{{ patAnalCal.resultatanal }}</td>
+            </tr>
+            <tr>
+                <th>Conclusionanal</th>
+                <td>{{ patAnalCal.conclusionanal }}</td>
+            </tr>
+            <tr>
+                <th>Numtempanal</th>
+                <td>{{ patAnalCal.numtempanal }}</td>
+            </tr>
+            <tr>
+                <th>Datepat</th>
+                <td>{% if patAnalCal.datepat %}{{ patAnalCal.datepat|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('patanalcal_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('patanalcal_edit', { 'datepat': patAnalCal.datepat }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

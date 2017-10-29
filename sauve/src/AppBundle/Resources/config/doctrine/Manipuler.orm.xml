@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Manipuler" table="manipuler">
+    <indexes>
+      <index name="i_fk_manipuler_patient" columns="numpat,datepat"/>
+      <index name="i_fk_manipuler_consommable" columns="numconso"/>
+      <index name="IDX_E169B68543D087B" columns="numpat"/>
+    </indexes>
+    <id name="datepat" type="date" column="datepat"/>
+    <field name="qtesortieconso" type="integer" column="qtesortieconso" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="numpat" target-entity="Patient" fetch="LAZY">
+      <join-columns>
+        <join-column name="numpat" referenced-column-name="numpat"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="numconso" target-entity="Consommable" fetch="LAZY">
+      <join-columns>
+        <join-column name="numconso" referenced-column-name="numconso"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,47 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Cmdfrs
+ *
+ * @ORM\Table(name="cmdfrs")
+ * @ORM\Entity
+ */
+class Cmdfrs
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="datecmdfrs", type="date", nullable=false)
+     */
+    private $datecmdfrs;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numcmdfrs", type="smallint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $numcmdfrs;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ligneentree", mappedBy="numcmdfrs")
+     */
+    private $ligneentree;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ligneentree = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

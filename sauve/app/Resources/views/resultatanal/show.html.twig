@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Resultatanal</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Dateresultatanal</th>
+                <td>{% if resultatAnal.dateresultatanal %}{{ resultatAnal.dateresultatanal|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Numresultatanal</th>
+                <td>{{ resultatAnal.numresultatanal }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('resultatanal_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('resultatanal_edit', { 'numresultatanal': resultatAnal.numresultatanal }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

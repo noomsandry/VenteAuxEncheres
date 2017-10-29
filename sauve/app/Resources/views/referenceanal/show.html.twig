@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Referenceanal</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Libellerefanal</th>
+                <td>{{ referenceAnal.libellerefanal }}</td>
+            </tr>
+            <tr>
+                <th>Numrefanal</th>
+                <td>{{ referenceAnal.numrefanal }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('referenceanal_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('referenceanal_edit', { 'numrefanal': referenceAnal.numrefanal }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

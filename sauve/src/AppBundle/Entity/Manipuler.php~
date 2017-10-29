@@ -1,0 +1,53 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Manipuler
+ *
+ * @ORM\Table(name="manipuler", indexes={@ORM\Index(name="i_fk_manipuler_patient", columns={"numpat", "datepat"}), @ORM\Index(name="i_fk_manipuler_consommable", columns={"numconso"}), @ORM\Index(name="IDX_E169B68543D087B", columns={"numpat"})})
+ * @ORM\Entity
+ */
+class Manipuler
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="qtesortieconso", type="integer", nullable=false)
+     */
+    private $qtesortieconso;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="datepat", type="date")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $datepat;
+
+    /**
+     * @var \AppBundle\Entity\Patient
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Patient")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="numpat", referencedColumnName="numpat")
+     * })
+     */
+    private $numpat;
+
+    /**
+     * @var \AppBundle\Entity\Consommable
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Consommable")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="numconso", referencedColumnName="numconso")
+     * })
+     */
+    private $numconso;
+
+
+}
+

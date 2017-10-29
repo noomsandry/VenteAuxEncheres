@@ -1,0 +1,47 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Etablissement
+ *
+ * @ORM\Table(name="etablissement")
+ * @ORM\Entity
+ */
+class Etablissement
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nometab", type="string", length=32, nullable=false)
+     */
+    private $nometab;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numetab", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $numetab;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Personne", mappedBy="numetab")
+     */
+    private $personne;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->personne = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

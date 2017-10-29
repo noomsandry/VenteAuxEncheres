@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Groupeanal</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Nomgroupeanal</th>
+                <td>{{ groupeAnal.nomgroupeanal }}</td>
+            </tr>
+            <tr>
+                <th>Nomanal</th>
+                <td>{{ groupeAnal.nomanal }}</td>
+            </tr>
+            <tr>
+                <th>Prixanal</th>
+                <td>{{ groupeAnal.prixanal }}</td>
+            </tr>
+            <tr>
+                <th>Numgroupeanal</th>
+                <td>{{ groupeAnal.numgroupeanal }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('groupeanal_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('groupeanal_edit', { 'numgroupeanal': groupeAnal.numgroupeanal }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

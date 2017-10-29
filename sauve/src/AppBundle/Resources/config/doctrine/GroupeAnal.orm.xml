@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\GroupeAnal" table="groupe_anal">
+    <indexes>
+      <index name="i_fk_groupe_anal_analyse" columns="numanal"/>
+    </indexes>
+    <id name="numgroupeanal" type="smallint" column="numgroupeanal">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nomgroupeanal" type="string" column="nomgroupeanal" length="32" nullable="false">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="nomanal" type="string" column="nomanal" length="32" nullable="false">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="prixanal" type="bigint" column="prixanal" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="numanal" target-entity="Analyse" fetch="LAZY">
+      <join-columns>
+        <join-column name="numanal" referenced-column-name="numanal"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="numexam" target-entity="Examen" inversed-by="numgroupeanal" fetch="LAZY">
+      <join-table name="exam_groupanal">
+        <join-columns>
+          <join-column name="numgroupeanal" referenced-column-name="numgroupeanal"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="numexam" referenced-column-name="numexam"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+    <many-to-many field="numprelev" target-entity="Prelevement" inversed-by="numgroupeanal" fetch="LAZY">
+      <join-table name="prelev_groupanal">
+        <join-columns>
+          <join-column name="numgroupeanal" referenced-column-name="numgroupeanal"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="numprelev" referenced-column-name="numprelev"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

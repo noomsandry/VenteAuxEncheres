@@ -1,0 +1,104 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Patient
+ *
+ * @ORM\Table(name="patient", indexes={@ORM\Index(name="i_fk_patient_personne", columns={"numpers"})})
+ * @ORM\Entity
+ */
+class Patient
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="drprescri", type="string", length=32, nullable=false)
+     */
+    private $drprescri;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="renseigncli", type="string", length=32, nullable=true)
+     */
+    private $renseigncli;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numpat", type="smallint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $numpat;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Manipuler", mappedBy="numpat")
+     */
+    private $manipuler;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PatCateganalCal", mappedBy="numpat")
+     */
+    private $patCateganalCal;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PatElemCal", mappedBy="numpat")
+     */
+    private $patElemCal;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PatPrelev", mappedBy="numpat")
+     */
+    private $patPrelev;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PatResanal", mappedBy="numpat")
+     */
+    private $patResanal;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PersAnalCal", mappedBy="numpat")
+     */
+    private $persAnalCal;
+
+    /**
+     * @var \AppBundle\Entity\Personne
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Personne")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="numpers", referencedColumnName="numpers")
+     * })
+     */
+    private $numpers;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->manipuler = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->patCateganalCal = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->patElemCal = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->patPrelev = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->patResanal = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->persAnalCal = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

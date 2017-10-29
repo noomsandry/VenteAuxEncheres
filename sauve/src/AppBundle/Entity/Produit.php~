@@ -1,0 +1,63 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Produit
+ *
+ * @ORM\Table(name="produit")
+ * @ORM\Entity
+ */
+class Produit
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="designationprod", type="string", length=32, nullable=false)
+     */
+    private $designationprod;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numprod", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $numprod;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Consommable", mappedBy="numprod")
+     */
+    private $consommable;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reactif", mappedBy="numprod")
+     */
+    private $reactif;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Sousproduit", mappedBy="numprod")
+     */
+    private $sousproduit;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->consommable = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->reactif = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->sousproduit = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

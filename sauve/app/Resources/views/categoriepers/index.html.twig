@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Categoriepers list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nomcategpers</th>
+                <th>Numcategpers</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categoriePer in categoriePers %}
+            <tr>
+                <td><a href="{{ path('categoriepers_show', { 'numcategpers': categoriePer.numcategpers }) }}">{{ categoriePer.nomcategpers }}</a></td>
+                <td>{{ categoriePer.numcategpers }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('categoriepers_show', { 'numcategpers': categoriePer.numcategpers }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('categoriepers_edit', { 'numcategpers': categoriePer.numcategpers }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('categoriepers_new') }}">Create a new categoriePer</a>
+        </li>
+    </ul>
+{% endblock %}

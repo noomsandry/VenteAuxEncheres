@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Groupeelems list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nomgroupeelem</th>
+                <th>Numgroupeelem</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for groupeElem in groupeElems %}
+            <tr>
+                <td><a href="{{ path('groupeelem_show', { 'numgroupeelem': groupeElem.numgroupeelem }) }}">{{ groupeElem.nomgroupeelem }}</a></td>
+                <td>{{ groupeElem.numgroupeelem }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('groupeelem_show', { 'numgroupeelem': groupeElem.numgroupeelem }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('groupeelem_edit', { 'numgroupeelem': groupeElem.numgroupeelem }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('groupeelem_new') }}">Create a new groupeElem</a>
+        </li>
+    </ul>
+{% endblock %}

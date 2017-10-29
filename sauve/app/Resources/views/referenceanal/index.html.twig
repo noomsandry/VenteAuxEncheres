@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Referenceanals list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Libellerefanal</th>
+                <th>Numrefanal</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for referenceAnal in referenceAnals %}
+            <tr>
+                <td><a href="{{ path('referenceanal_show', { 'numrefanal': referenceAnal.numrefanal }) }}">{{ referenceAnal.libellerefanal }}</a></td>
+                <td>{{ referenceAnal.numrefanal }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('referenceanal_show', { 'numrefanal': referenceAnal.numrefanal }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('referenceanal_edit', { 'numrefanal': referenceAnal.numrefanal }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('referenceanal_new') }}">Create a new referenceAnal</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\CategAnal" table="categ_anal">
+    <id name="numcateganal" type="smallint" column="numcateganal">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nomcateganal" type="string" column="nomcateganal" length="32" nullable="false">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <one-to-many field="patCateganalCal" target-entity="PatCateganalCal" mapped-by="numcateganal" fetch="LAZY"/>
+    <many-to-many field="numanal" target-entity="Analyse" mapped-by="numcateganal" fetch="LAZY"/>
+  </entity>
+</doctrine-mapping>

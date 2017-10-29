@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Persanalcal</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Interpretation</th>
+                <td>{{ persAnalCal.interpretation }}</td>
+            </tr>
+            <tr>
+                <th>Germeidentifie</th>
+                <td>{{ persAnalCal.germeidentifie }}</td>
+            </tr>
+            <tr>
+                <th>Etudeantibio</th>
+                <td>{{ persAnalCal.etudeantibio }}</td>
+            </tr>
+            <tr>
+                <th>Resultatanal</th>
+                <td>{{ persAnalCal.resultatanal }}</td>
+            </tr>
+            <tr>
+                <th>Conclusionanal</th>
+                <td>{{ persAnalCal.conclusionanal }}</td>
+            </tr>
+            <tr>
+                <th>Datepat</th>
+                <td>{% if persAnalCal.datepat %}{{ persAnalCal.datepat|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('persanalcal_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('persanalcal_edit', { 'datepat': persAnalCal.datepat }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

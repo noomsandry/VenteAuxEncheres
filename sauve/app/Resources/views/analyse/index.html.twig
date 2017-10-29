@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Analyses list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nomanal</th>
+                <th>Prixanal</th>
+                <th>Numanal</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for analyse in analyses %}
+            <tr>
+                <td><a href="{{ path('analyse_show', { 'numanal': analyse.numanal }) }}">{{ analyse.nomanal }}</a></td>
+                <td>{{ analyse.prixanal }}</td>
+                <td>{{ analyse.numanal }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('analyse_show', { 'numanal': analyse.numanal }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('analyse_edit', { 'numanal': analyse.numanal }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('analyse_new') }}">Create a new analyse</a>
+        </li>
+    </ul>
+{% endblock %}

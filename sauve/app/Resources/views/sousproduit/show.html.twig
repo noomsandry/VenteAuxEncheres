@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Sousproduit</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Dateperump</th>
+                <td>{% if sousproduit.dateperump %}{{ sousproduit.dateperump|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Pu</th>
+                <td>{{ sousproduit.pu }}</td>
+            </tr>
+            <tr>
+                <th>Qtesousprod</th>
+                <td>{{ sousproduit.qtesousprod }}</td>
+            </tr>
+            <tr>
+                <th>Numsousprod</th>
+                <td>{{ sousproduit.numsousprod }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('sousproduit_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('sousproduit_edit', { 'numsousprod': sousproduit.numsousprod }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

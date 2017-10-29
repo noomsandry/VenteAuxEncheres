@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Sousproduits list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Dateperump</th>
+                <th>Pu</th>
+                <th>Qtesousprod</th>
+                <th>Numsousprod</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sousproduit in sousproduits %}
+            <tr>
+                <td><a href="{{ path('sousproduit_show', { 'numsousprod': sousproduit.numsousprod }) }}">{{ sousproduit.dateperump|date('Y-m-d') }}</a></td>
+                <td>{{ sousproduit.pu }}</td>
+                <td>{{ sousproduit.qtesousprod }}</td>
+                <td>{{ sousproduit.numsousprod }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('sousproduit_show', { 'numsousprod': sousproduit.numsousprod }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('sousproduit_edit', { 'numsousprod': sousproduit.numsousprod }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('sousproduit_new') }}">Create a new sousproduit</a>
+        </li>
+    </ul>
+{% endblock %}

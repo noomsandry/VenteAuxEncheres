@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Resultatanals list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Dateresultatanal</th>
+                <th>Numresultatanal</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for resultatAnal in resultatAnals %}
+            <tr>
+                <td><a href="{{ path('resultatanal_show', { 'numresultatanal': resultatAnal.numresultatanal }) }}">{{ resultatAnal.dateresultatanal }}</a></td>
+                <td>{{ resultatAnal.numresultatanal }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('resultatanal_show', { 'numresultatanal': resultatAnal.numresultatanal }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('resultatanal_edit', { 'numresultatanal': resultatAnal.numresultatanal }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('resultatanal_new') }}">Create a new resultatAnal</a>
+        </li>
+    </ul>
+{% endblock %}

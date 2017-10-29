@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Sousproduit" table="sousproduit">
+    <indexes>
+      <index name="i_fk_sousproduit_produit" columns="numprod"/>
+    </indexes>
+    <id name="numsousprod" type="bigint" column="numsousprod">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="dateperump" type="date" column="dateperump" nullable="false"/>
+    <field name="pu" type="bigint" column="pu" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="qtesousprod" type="bigint" column="qtesousprod" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <one-to-many field="ligneentree" target-entity="Ligneentree" mapped-by="numsousprod" index-by="numlingeentree" fetch="LAZY"/>
+    <many-to-one field="numprod" target-entity="Produit" fetch="LAZY">
+      <join-columns>
+        <join-column name="numprod" referenced-column-name="numprod"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

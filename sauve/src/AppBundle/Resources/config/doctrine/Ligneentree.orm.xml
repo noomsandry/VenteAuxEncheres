@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Ligneentree" table="ligneentree">
+    <indexes>
+      <index name="i_fk_ligneentree_cmdfrs" columns="numcmdfrs"/>
+      <index name="i_fk_ligneentree_sousproduit" columns="numsousprod"/>
+    </indexes>
+    <id name="numlingeentree" type="bigint" column="numlingeentree">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="qteentree" type="bigint" column="qteentree" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="numcmdfrs" target-entity="Cmdfrs" fetch="LAZY">
+      <join-columns>
+        <join-column name="numcmdfrs" referenced-column-name="numcmdfrs"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="numsousprod" target-entity="Sousproduit" fetch="LAZY">
+      <join-columns>
+        <join-column name="numsousprod" referenced-column-name="numsousprod"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

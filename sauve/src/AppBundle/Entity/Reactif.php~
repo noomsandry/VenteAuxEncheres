@@ -1,0 +1,72 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Reactif
+ *
+ * @ORM\Table(name="reactif", indexes={@ORM\Index(name="i_fk_reactif_produit", columns={"numprod"})})
+ * @ORM\Entity
+ */
+class Reactif
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nomreact", type="string", length=32, nullable=false)
+     */
+    private $nomreact;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="designationprod", type="string", length=32, nullable=false)
+     */
+    private $designationprod;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numreact", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $numreact;
+
+    /**
+     * @var \AppBundle\Entity\Produit
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Produit")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="numprod", referencedColumnName="numprod")
+     * })
+     */
+    private $numprod;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Analyse", inversedBy="numreact")
+     * @ORM\JoinTable(name="utiliser",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="numreact", referencedColumnName="numreact")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="numanal", referencedColumnName="numanal")
+     *   }
+     * )
+     */
+    private $numanal;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->numanal = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

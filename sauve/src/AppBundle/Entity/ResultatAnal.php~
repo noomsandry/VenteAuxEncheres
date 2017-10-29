@@ -1,0 +1,47 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ResultatAnal
+ *
+ * @ORM\Table(name="resultat_anal")
+ * @ORM\Entity
+ */
+class ResultatAnal
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateresultatanal", type="date", nullable=true)
+     */
+    private $dateresultatanal;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numresultatanal", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $numresultatanal;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PatResanal", mappedBy="numresultatanal")
+     */
+    private $patResanal;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->patResanal = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

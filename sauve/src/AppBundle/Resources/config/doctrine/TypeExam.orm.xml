@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\TypeExam" table="type_exam">
+    <id name="numtypeexam" type="smallint" column="numtypeexam">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nomtypeexam" type="string" column="nomtypeexam" length="32" nullable="false">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <many-to-many field="numexam" target-entity="Examen" inversed-by="numtypeexam" fetch="LAZY">
+      <join-table name="exam_typexam">
+        <join-columns>
+          <join-column name="numtypeexam" referenced-column-name="numtypeexam"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="numexam" referenced-column-name="numexam"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

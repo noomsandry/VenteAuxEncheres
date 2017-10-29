@@ -1,0 +1,47 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ReferenceAnal
+ *
+ * @ORM\Table(name="reference_anal")
+ * @ORM\Entity
+ */
+class ReferenceAnal
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="libellerefanal", type="string", length=32, nullable=true)
+     */
+    private $libellerefanal;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numrefanal", type="smallint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $numrefanal;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Analyse", mappedBy="numrefanal")
+     */
+    private $numanal;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->numanal = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

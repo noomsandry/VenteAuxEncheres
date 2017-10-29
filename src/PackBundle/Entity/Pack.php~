@@ -1,0 +1,291 @@
+<?php
+
+namespace PackBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Pack
+ *
+ * @ORM\Table(name="pack")
+ * @ORM\Entity(repositoryClass="PackBundle\Repository\PackRepository")
+ */
+class Pack
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /** @ORM\ManyToOne(targetEntity="MembreBundle\Entity\Membre",cascade={"persist"})
+     * @Serializer\Expose
+     *  @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
+     * @Assert\Valid()
+     */
+    private $acheteur;
+
+     /**
+     * @ORM\OneToMany(targetEntity="ProduitBundle\Entity\Produit",mappedBy="pack",cascade={"persist"}) 
+     */
+    private $produits;
+    
+    /**
+     * @return mixed
+     */
+    public function getAcheteur()
+    {
+        return $this->acheteur;
+    }
+
+    /**
+     * @param mixed $acheteur
+     */
+    public function setAcheteur($acheteur)
+    {
+        $this->acheteur = $acheteur;
+    }
+
+    /**
+     * @var string
+     * @Serializer\Expose
+     * @ORM\Column(name="nom", type="string", length=100)
+     * @Assert\NotBlank()
+     */
+    private $nom;
+
+    /**
+     * @return string
+     */
+    public function getNomPack()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * @param string $nom
+     */
+    public function setNomPack($nom)
+    {
+        $this->nom = $nom;
+    }
+    
+  
+      /**
+     * @var int
+     *
+     * @ORM\Column(name="etat", type="integer" , options={"default":0})
+     */
+     private $etat;
+    
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateDebut", type="date", nullable=true )
+     */
+    private $dateDebut;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="delai", type="integer")
+     */
+    private $delai;
+
+      /**
+     * @var int
+     * @Serializer\Expose
+     * @ORM\Column(name="prix", type="decimal", precision=10, scale=2)
+     * @Assert\NotBlank()
+     */
+    private $prix;
+   
+      /**
+       *@ORM\ManyToOne(targetEntity="VendeurBundle\Entity\Magasin",inversedBy="packs")
+      * @Serializer\Expose
+      * @ORM\JoinColumn(onDelete="CASCADE")  
+       * @Assert\Valid()   
+      */
+    private $magasin;
+    
+    /**
+     * @return int
+     */
+    public function getDelai()
+    {
+        return $this->delai;
+    }
+
+    /**
+     * @param int $delai
+     */
+    public function setDelai($delai)
+    {
+        $this->delai = $delai;
+    }
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set dateDebut
+     *
+     * @param \DateTime $dateDebut
+     *
+     * @return Pack
+     */
+    public function setDateDebut($dateDebut)
+    {
+        $this->dateDebut = $dateDebut;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDebut
+     *
+     * @return \DateTime
+     */
+    public function getDateDebut()
+    {
+        return $this->dateDebut;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->produits = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->setPrix(0);
+    }
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     *
+     * @return Pack
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+    
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Add produit
+     *
+     * @param \ProduitBundle\Entity\Produit $produit
+     *
+     * @return Pack
+     */
+    public function addProduit(\ProduitBundle\Entity\Produit $produit)
+    {
+        $this->produits[] = $produit;
+        $produit->setPack($this);
+        $this->setPrix($this->getPrix() + $produit->getPrix());
+        return $this;
+    }
+
+    /**
+     * Remove produit
+     *
+     * @param \ProduitBundle\Entity\Produit $produit
+     */
+    public function removeProduit(\ProduitBundle\Entity\Produit $produit)
+    {
+        $this->produits->removeElement($produit);
+        $this->setPrix($this->getPrix() - $produit->getPrix());
+        $produit->setPack(null);
+    }
+
+    /**
+     * Get produits
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProduits()
+    {
+        return $this->produits;
+    }
+
+  
+
+
+
+    /**
+     * Set etat
+     *
+     * @param integer $etat
+     *
+     * @return Pack
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+    
+        return $this;
+    }
+
+    /**
+     * Get etat
+     *
+     * @return integer
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * Set prix
+     *
+     * @param string $prix
+     *
+     * @return Pack
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+    
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return string
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+
+}

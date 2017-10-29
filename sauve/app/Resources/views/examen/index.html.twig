@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Examens list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nomexam</th>
+                <th>Numexam</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for examan in examens %}
+            <tr>
+                <td><a href="{{ path('examen_show', { 'numexam': examan.numexam }) }}">{{ examan.nomexam }}</a></td>
+                <td>{{ examan.numexam }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('examen_show', { 'numexam': examan.numexam }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('examen_edit', { 'numexam': examan.numexam }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('examen_new') }}">Create a new examan</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Consommable" table="consommable">
+    <indexes>
+      <index name="i_fk_consommable_produit" columns="numprod"/>
+    </indexes>
+    <id name="numconso" type="bigint" column="numconso">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nomconso" type="string" column="nomconso" length="32" nullable="false">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="designationprod" type="string" column="designationprod" length="32" nullable="false">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <one-to-many field="manipuler" target-entity="Manipuler" mapped-by="numconso" fetch="LAZY"/>
+    <many-to-one field="numprod" target-entity="Produit" fetch="LAZY">
+      <join-columns>
+        <join-column name="numprod" referenced-column-name="numprod"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

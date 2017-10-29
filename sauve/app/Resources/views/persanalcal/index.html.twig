@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Persanalcals list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Interpretation</th>
+                <th>Germeidentifie</th>
+                <th>Etudeantibio</th>
+                <th>Resultatanal</th>
+                <th>Conclusionanal</th>
+                <th>Datepat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for persAnalCal in persAnalCals %}
+            <tr>
+                <td><a href="{{ path('persanalcal_show', { 'datepat': persAnalCal.datepat }) }}">{{ persAnalCal.interpretation }}</a></td>
+                <td>{{ persAnalCal.germeidentifie }}</td>
+                <td>{{ persAnalCal.etudeantibio }}</td>
+                <td>{{ persAnalCal.resultatanal }}</td>
+                <td>{{ persAnalCal.conclusionanal }}</td>
+                <td>{% if persAnalCal.datepat %}{{ persAnalCal.datepat|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('persanalcal_show', { 'datepat': persAnalCal.datepat }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('persanalcal_edit', { 'datepat': persAnalCal.datepat }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('persanalcal_new') }}">Create a new persAnalCal</a>
+        </li>
+    </ul>
+{% endblock %}

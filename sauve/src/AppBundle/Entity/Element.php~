@@ -1,0 +1,65 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Element
+ *
+ * @ORM\Table(name="element", indexes={@ORM\Index(name="i_fk_element_examen", columns={"numexam"})})
+ * @ORM\Entity
+ */
+class Element
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nomelem", type="string", length=32, nullable=false)
+     */
+    private $nomelem;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numelem", type="smallint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $numelem;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PatElemCal", mappedBy="numelem")
+     */
+    private $patElemCal;
+
+    /**
+     * @var \AppBundle\Entity\Examen
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Examen")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="numexam", referencedColumnName="numexam")
+     * })
+     */
+    private $numexam;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\GroupeElem", mappedBy="numelem")
+     */
+    private $numgroupeelem;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->patElemCal = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->numgroupeelem = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

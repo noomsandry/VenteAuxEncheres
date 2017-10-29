@@ -1,0 +1,112 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Analyse
+ *
+ * @ORM\Table(name="analyse", indexes={@ORM\Index(name="i_fk_analyse_unite", columns={"numunit"})})
+ * @ORM\Entity
+ */
+class Analyse
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nomanal", type="string", length=32, nullable=false)
+     */
+    private $nomanal;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prixanal", type="bigint", nullable=false)
+     */
+    private $prixanal;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numanal", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $numanal;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\GroupeAnal", mappedBy="numanal")
+     */
+    private $groupeAnal;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PersAnalCal", mappedBy="numanal")
+     */
+    private $persAnalCal;
+
+    /**
+     * @var \AppBundle\Entity\Unite
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Unite")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="numunit", referencedColumnName="numunit")
+     * })
+     */
+    private $numunit;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\CategAnal", inversedBy="numanal")
+     * @ORM\JoinTable(name="anal_categanal",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="numanal", referencedColumnName="numanal")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="numcateganal", referencedColumnName="numcateganal")
+     *   }
+     * )
+     */
+    private $numcateganal;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\ReferenceAnal", inversedBy="numanal")
+     * @ORM\JoinTable(name="anal_refanal",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="numanal", referencedColumnName="numanal")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="numrefanal", referencedColumnName="numrefanal")
+     *   }
+     * )
+     */
+    private $numrefanal;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Reactif", mappedBy="numanal")
+     */
+    private $numreact;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->groupeAnal = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->persAnalCal = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->numcateganal = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->numrefanal = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->numreact = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

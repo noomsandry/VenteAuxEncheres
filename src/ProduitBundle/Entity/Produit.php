@@ -1,0 +1,269 @@
+<?php
+
+namespace ProduitBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Produit
+ *
+ * @ORM\Table(name="produit")
+ * @ORM\Entity(repositoryClass="ProduitBundle\Repository\ProduitRepository")
+ * @Serializer\ExclusionPolicy("ALL")
+ */
+class Produit
+{
+    
+    
+    public function __construct($id = "") {
+        $this->id = $id;
+        $this->photos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @Serializer\Expose
+     */
+    private $id;
+
+    /**
+     * @var string
+      * @Serializer\Expose
+     * @ORM\Column(name="nom", type="string", length=100)
+     * @Assert\NotBlank()
+     */
+    private $nom;
+
+    /**
+     * @var int
+     * @Serializer\Expose
+     * @ORM\Column(name="prix", type="integer")
+     * @Assert\Regex(pattern="/[^0]/")
+     * @Assert\NotBlank()
+     */
+    private $prix;
+
+     /** @ORM\ManyToOne(targetEntity="ProduitBundle\Entity\Categorie",cascade={"persist"})
+      * @Serializer\Expose
+      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+      * @Assert\Valid()
+      */
+     private $categorie;
+
+    /** @ORM\ManyToOne(targetEntity="PackBundle\Entity\Pack",cascade={"persist"})
+     * @Serializer\Expose
+     * @ORM\JoinColumn(nullable=true,onDelete="CASCADE")
+     * @Assert\Valid()
+     */
+     private $pack;
+     
+    /**
+     * @var string
+     * @Serializer\Expose
+     * @ORM\Column(name="description", type="string", length=255)
+     * @Assert\NotBlank()
+     */
+    
+    
+    private $description;
+
+      /**
+     * @ORM\ManyToMany(targetEntity="ProduitBundle\Entity\Photo",cascade={"persist"})
+     * @ORM\JoinColumn(onDelete="CASCADE")     
+     */
+    private $photos;
+    
+     /** @ORM\ManyToOne(targetEntity="VendeurBundle\Entity\Magasin",cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     * @Assert\Valid()
+     */
+     private $magasin;
+     
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     *
+     * @return Produit
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+    
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set prix
+     *
+     * @param integer $prix
+     *
+     * @return Produit
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+    
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return integer
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Produit
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+    
+       /**
+     * Set categorie
+     *
+     * @param string $description
+     *
+     * @return Categorie
+     */
+    public function setCategorie($categorie)
+    {
+        $this->categorie = $categorie;
+    
+        return $this;
+    }
+
+    /**
+     * Get categorie
+     *
+     * @return string
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPack()
+    {
+        return $this->pack;
+    }
+    /**
+     * @param mixed $pack
+     */
+    public function setPack($pack)
+    {
+        $this->pack = $pack;
+    }
+
+
+
+    /**
+     * Add photo
+     *
+     * @param \ProduitBundle\Entity\Photo $photo
+     *
+     * @return Produit
+     */
+    public function addPhoto(\ProduitBundle\Entity\Photo $photo)
+    {
+        $this->photos[] = $photo;
+    
+        return $this;
+    }
+
+    /**
+     * Remove photo
+     *
+     * @param \ProduitBundle\Entity\Photo $photo
+     */
+    public function removePhoto(\ProduitBundle\Entity\Photo $photo)
+    {
+        $this->photos->removeElement($photo);
+    }
+
+    /**
+     * Get photos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+
+    /**
+     * Set magasin
+     *
+     * @param \VendeurBundle\Entity\Magasin $magasin
+     *
+     * @return Produit
+     */
+    public function setMagasin(\VendeurBundle\Entity\Magasin $magasin = null)
+    {
+        $this->magasin = $magasin;
+    
+        return $this;
+    }
+
+    /**
+     * Get magasin
+     *
+     * @return \VendeurBundle\Entity\Magasin
+     */
+    public function getMagasin()
+    {
+        return $this->magasin;
+    }
+}

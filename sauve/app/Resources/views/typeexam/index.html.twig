@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Typeexams list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nomtypeexam</th>
+                <th>Numtypeexam</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for typeExam in typeExams %}
+            <tr>
+                <td><a href="{{ path('typeexam_show', { 'numtypeexam': typeExam.numtypeexam }) }}">{{ typeExam.nomtypeexam }}</a></td>
+                <td>{{ typeExam.numtypeexam }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('typeexam_show', { 'numtypeexam': typeExam.numtypeexam }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('typeexam_edit', { 'numtypeexam': typeExam.numtypeexam }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('typeexam_new') }}">Create a new typeExam</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Examen" table="examen">
+    <id name="numexam" type="smallint" column="numexam">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nomexam" type="string" column="nomexam" length="32" nullable="false">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <one-to-many field="element" target-entity="Element" mapped-by="numexam" index-by="numelem" fetch="LAZY"/>
+    <many-to-many field="numgroupeanal" target-entity="GroupeAnal" mapped-by="numexam" fetch="LAZY"/>
+    <many-to-many field="numtypeexam" target-entity="TypeExam" mapped-by="numexam" fetch="LAZY"/>
+  </entity>
+</doctrine-mapping>

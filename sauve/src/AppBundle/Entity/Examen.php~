@@ -1,0 +1,63 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Examen
+ *
+ * @ORM\Table(name="examen")
+ * @ORM\Entity
+ */
+class Examen
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nomexam", type="string", length=32, nullable=false)
+     */
+    private $nomexam;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numexam", type="smallint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $numexam;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Element", mappedBy="numexam")
+     */
+    private $element;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\GroupeAnal", mappedBy="numexam")
+     */
+    private $numgroupeanal;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\TypeExam", mappedBy="numexam")
+     */
+    private $numtypeexam;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->element = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->numgroupeanal = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->numtypeexam = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

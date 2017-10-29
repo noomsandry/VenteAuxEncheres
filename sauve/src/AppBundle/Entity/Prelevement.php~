@@ -1,0 +1,62 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Prelevement
+ *
+ * @ORM\Table(name="prelevement")
+ * @ORM\Entity
+ */
+class Prelevement
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateheureprelev", type="datetime", nullable=false)
+     */
+    private $dateheureprelev;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateheurearriv", type="datetime", nullable=true)
+     */
+    private $dateheurearriv;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numprelev", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $numprelev;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PatPrelev", mappedBy="numprelev")
+     */
+    private $patPrelev;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\GroupeAnal", mappedBy="numprelev")
+     */
+    private $numgroupeanal;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->patPrelev = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->numgroupeanal = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

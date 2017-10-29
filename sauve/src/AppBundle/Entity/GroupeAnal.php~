@@ -1,0 +1,95 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * GroupeAnal
+ *
+ * @ORM\Table(name="groupe_anal", indexes={@ORM\Index(name="i_fk_groupe_anal_analyse", columns={"numanal"})})
+ * @ORM\Entity
+ */
+class GroupeAnal
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nomgroupeanal", type="string", length=32, nullable=false)
+     */
+    private $nomgroupeanal;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nomanal", type="string", length=32, nullable=false)
+     */
+    private $nomanal;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prixanal", type="bigint", nullable=false)
+     */
+    private $prixanal;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numgroupeanal", type="smallint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $numgroupeanal;
+
+    /**
+     * @var \AppBundle\Entity\Analyse
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Analyse")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="numanal", referencedColumnName="numanal")
+     * })
+     */
+    private $numanal;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Examen", inversedBy="numgroupeanal")
+     * @ORM\JoinTable(name="exam_groupanal",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="numgroupeanal", referencedColumnName="numgroupeanal")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="numexam", referencedColumnName="numexam")
+     *   }
+     * )
+     */
+    private $numexam;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Prelevement", inversedBy="numgroupeanal")
+     * @ORM\JoinTable(name="prelev_groupanal",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="numgroupeanal", referencedColumnName="numgroupeanal")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="numprelev", referencedColumnName="numprelev")
+     *   }
+     * )
+     */
+    private $numprelev;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->numexam = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->numprelev = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}
+

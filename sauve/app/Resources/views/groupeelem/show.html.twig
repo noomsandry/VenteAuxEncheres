@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Groupeelem</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Nomgroupeelem</th>
+                <td>{{ groupeElem.nomgroupeelem }}</td>
+            </tr>
+            <tr>
+                <th>Numgroupeelem</th>
+                <td>{{ groupeElem.numgroupeelem }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('groupeelem_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('groupeelem_edit', { 'numgroupeelem': groupeElem.numgroupeelem }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

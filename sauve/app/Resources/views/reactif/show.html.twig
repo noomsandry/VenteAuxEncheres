@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Reactif</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Nomreact</th>
+                <td>{{ reactif.nomreact }}</td>
+            </tr>
+            <tr>
+                <th>Designationprod</th>
+                <td>{{ reactif.designationprod }}</td>
+            </tr>
+            <tr>
+                <th>Numreact</th>
+                <td>{{ reactif.numreact }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('reactif_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('reactif_edit', { 'numreact': reactif.numreact }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

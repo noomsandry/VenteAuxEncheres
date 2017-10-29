@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Consommables list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nomconso</th>
+                <th>Designationprod</th>
+                <th>Numconso</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for consommable in consommables %}
+            <tr>
+                <td><a href="{{ path('consommable_show', { 'numconso': consommable.numconso }) }}">{{ consommable.nomconso }}</a></td>
+                <td>{{ consommable.designationprod }}</td>
+                <td>{{ consommable.numconso }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('consommable_show', { 'numconso': consommable.numconso }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('consommable_edit', { 'numconso': consommable.numconso }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('consommable_new') }}">Create a new consommable</a>
+        </li>
+    </ul>
+{% endblock %}

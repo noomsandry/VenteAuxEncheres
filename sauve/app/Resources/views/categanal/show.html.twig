@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Categanal</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Nomcateganal</th>
+                <td>{{ categAnal.nomcateganal }}</td>
+            </tr>
+            <tr>
+                <th>Numcateganal</th>
+                <td>{{ categAnal.numcateganal }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('categanal_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('categanal_edit', { 'numcateganal': categAnal.numcateganal }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Consommable</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Nomconso</th>
+                <td>{{ consommable.nomconso }}</td>
+            </tr>
+            <tr>
+                <th>Designationprod</th>
+                <td>{{ consommable.designationprod }}</td>
+            </tr>
+            <tr>
+                <th>Numconso</th>
+                <td>{{ consommable.numconso }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('consommable_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('consommable_edit', { 'numconso': consommable.numconso }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

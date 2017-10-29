@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Reactifs list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nomreact</th>
+                <th>Designationprod</th>
+                <th>Numreact</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reactif in reactifs %}
+            <tr>
+                <td><a href="{{ path('reactif_show', { 'numreact': reactif.numreact }) }}">{{ reactif.nomreact }}</a></td>
+                <td>{{ reactif.designationprod }}</td>
+                <td>{{ reactif.numreact }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('reactif_show', { 'numreact': reactif.numreact }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('reactif_edit', { 'numreact': reactif.numreact }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('reactif_new') }}">Create a new reactif</a>
+        </li>
+    </ul>
+{% endblock %}

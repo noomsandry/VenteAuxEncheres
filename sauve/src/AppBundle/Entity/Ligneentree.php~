@@ -1,0 +1,53 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Ligneentree
+ *
+ * @ORM\Table(name="ligneentree", indexes={@ORM\Index(name="i_fk_ligneentree_cmdfrs", columns={"numcmdfrs"}), @ORM\Index(name="i_fk_ligneentree_sousproduit", columns={"numsousprod"})})
+ * @ORM\Entity
+ */
+class Ligneentree
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="qteentree", type="bigint", nullable=false)
+     */
+    private $qteentree;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numlingeentree", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $numlingeentree;
+
+    /**
+     * @var \AppBundle\Entity\Cmdfrs
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Cmdfrs")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="numcmdfrs", referencedColumnName="numcmdfrs")
+     * })
+     */
+    private $numcmdfrs;
+
+    /**
+     * @var \AppBundle\Entity\Sousproduit
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Sousproduit")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="numsousprod", referencedColumnName="numsousprod")
+     * })
+     */
+    private $numsousprod;
+
+
+}
+

@@ -1,0 +1,81 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PersAnalCal
+ *
+ * @ORM\Table(name="pers_anal_cal", indexes={@ORM\Index(name="i_fk_pers_anal_cal_patient", columns={"numpat", "datepat"}), @ORM\Index(name="i_fk_pers_anal_cal_analyse", columns={"numanal"}), @ORM\Index(name="IDX_AA15B62643D087B", columns={"numpat"})})
+ * @ORM\Entity
+ */
+class PersAnalCal
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="interpretation", type="string", length=32, nullable=true)
+     */
+    private $interpretation;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="germeidentifie", type="string", length=32, nullable=true)
+     */
+    private $germeidentifie;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="etudeantibio", type="string", length=32, nullable=true)
+     */
+    private $etudeantibio;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="resultatanal", type="string", length=32, nullable=true)
+     */
+    private $resultatanal;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="conclusionanal", type="string", length=50, nullable=true)
+     */
+    private $conclusionanal;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="datepat", type="date")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $datepat;
+
+    /**
+     * @var \AppBundle\Entity\Patient
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Patient")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="numpat", referencedColumnName="numpat")
+     * })
+     */
+    private $numpat;
+
+    /**
+     * @var \AppBundle\Entity\Analyse
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Analyse")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="numanal", referencedColumnName="numanal")
+     * })
+     */
+    private $numanal;
+
+
+}
+

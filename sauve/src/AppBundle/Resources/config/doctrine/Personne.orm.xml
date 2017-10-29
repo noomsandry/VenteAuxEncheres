@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Personne" table="personne">
+    <indexes>
+      <index name="i_fk_personne_etablissement" columns="numetab"/>
+    </indexes>
+    <id name="numpers" type="bigint" column="numpers">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nompers" type="string" column="nompers" length="32" nullable="false">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="prenompers" type="string" column="prenompers" length="32" nullable="false">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="datenaispers" type="date" column="datenaispers" nullable="false"/>
+    <field name="adressepers" type="string" column="adressepers" length="32" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <one-to-many field="patient" target-entity="Patient" mapped-by="numpers" index-by="numpat" fetch="LAZY"/>
+    <many-to-one field="numetab" target-entity="Etablissement" fetch="LAZY">
+      <join-columns>
+        <join-column name="numetab" referenced-column-name="numetab"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="numcategpers" target-entity="CategoriePers" inversed-by="numpers" fetch="LAZY">
+      <join-table name="pers_categpers">
+        <join-columns>
+          <join-column name="numpers" referenced-column-name="numpers"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="numcategpers" referenced-column-name="numcategpers"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

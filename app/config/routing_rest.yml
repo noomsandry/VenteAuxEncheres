@@ -1,0 +1,15 @@
+login:
+    type: rest
+    resource: "@MembreBundle/Controller/RestLoginController.php"
+
+password_management:
+    type: rest
+    resource: "@MembreBundle/Controller/RestPasswordManagementController.php"
+
+profile:
+    type: rest
+    resource: "@MembreBundle/Controller/RestProfileController.php"
+
+registration:
+    type: rest
+    resource: "@MembreBundle/Controller/RestRegistrationController.php"

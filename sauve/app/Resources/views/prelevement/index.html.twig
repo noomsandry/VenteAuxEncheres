@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Prelevements list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Dateheureprelev</th>
+                <th>Dateheurearriv</th>
+                <th>Numprelev</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for prelevement in prelevements %}
+            <tr>
+                <td><a href="{{ path('prelevement_show', { 'numprelev': prelevement.numprelev }) }}">{{ prelevement.dateheureprelev }}</a></td>
+                <td>{% if prelevement.dateheurearriv %}{{ prelevement.dateheurearriv|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ prelevement.numprelev }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('prelevement_show', { 'numprelev': prelevement.numprelev }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('prelevement_edit', { 'numprelev': prelevement.numprelev }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('prelevement_new') }}">Create a new prelevement</a>
+        </li>
+    </ul>
+{% endblock %}

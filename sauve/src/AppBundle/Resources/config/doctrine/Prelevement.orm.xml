@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Prelevement" table="prelevement">
+    <id name="numprelev" type="bigint" column="numprelev">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="dateheureprelev" type="datetime" column="dateheureprelev" nullable="false"/>
+    <field name="dateheurearriv" type="datetime" column="dateheurearriv" nullable="true"/>
+    <one-to-many field="patPrelev" target-entity="PatPrelev" mapped-by="numprelev" fetch="LAZY"/>
+    <many-to-many field="numgroupeanal" target-entity="GroupeAnal" mapped-by="numprelev" fetch="LAZY"/>
+  </entity>
+</doctrine-mapping>

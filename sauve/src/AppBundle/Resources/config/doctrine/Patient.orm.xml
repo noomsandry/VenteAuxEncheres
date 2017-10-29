@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Patient" table="patient">
+    <indexes>
+      <index name="i_fk_patient_personne" columns="numpers"/>
+    </indexes>
+    <id name="numpat" type="smallint" column="numpat">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="drprescri" type="string" column="drprescri" length="32" nullable="false">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <field name="renseigncli" type="string" column="renseigncli" length="32" nullable="true">
+      <options>
+        <option name="fixed">1</option>
+      </options>
+    </field>
+    <one-to-many field="manipuler" target-entity="Manipuler" mapped-by="numpat" fetch="LAZY"/>
+    <one-to-many field="patCateganalCal" target-entity="PatCateganalCal" mapped-by="numpat" fetch="LAZY"/>
+    <one-to-many field="patElemCal" target-entity="PatElemCal" mapped-by="numpat" fetch="LAZY"/>
+    <one-to-many field="patPrelev" target-entity="PatPrelev" mapped-by="numpat" fetch="LAZY"/>
+    <one-to-many field="patResanal" target-entity="PatResanal" mapped-by="numpat" fetch="LAZY"/>
+    <one-to-many field="persAnalCal" target-entity="PersAnalCal" mapped-by="numpat" fetch="LAZY"/>
+    <many-to-one field="numpers" target-entity="Personne" fetch="LAZY">
+      <join-columns>
+        <join-column name="numpers" referenced-column-name="numpers"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ligneentrees list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Qteentree</th>
+                <th>Numlingeentree</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ligneentree in ligneentrees %}
+            <tr>
+                <td><a href="{{ path('ligneentree_show', { 'numlingeentree': ligneentree.numlingeentree }) }}">{{ ligneentree.qteentree }}</a></td>
+                <td>{{ ligneentree.numlingeentree }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('ligneentree_show', { 'numlingeentree': ligneentree.numlingeentree }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('ligneentree_edit', { 'numlingeentree': ligneentree.numlingeentree }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('ligneentree_new') }}">Create a new ligneentree</a>
+        </li>
+    </ul>
+{% endblock %}

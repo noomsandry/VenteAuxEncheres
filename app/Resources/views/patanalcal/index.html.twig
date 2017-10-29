@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Patanalcals list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Interpretation</th>
+                <th>Germeidentifie</th>
+                <th>Etudeantibio</th>
+                <th>Resultatanal</th>
+                <th>Conclusionanal</th>
+                <th>Numtempanal</th>
+                <th>Datepat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for patAnalCal in patAnalCals %}
+            <tr>
+                <td><a href="{{ path('patanalcal_show', { 'datepat': patAnalCal.datepat|date('Y-m-d') }) }}">{{ patAnalCal.interpretation }}</a></td>
+                <td>{{ patAnalCal.germeidentifie }}</td>
+                <td>{{ patAnalCal.etudeantibio }}</td>
+                <td>{{ patAnalCal.resultatanal }}</td>
+                <td>{{ patAnalCal.conclusionanal }}</td>
+                <td>{{ patAnalCal.numtempanal }}</td>
+                <td>{% if patAnalCal.datepat %}{{ patAnalCal.datepat|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('patanalcal_show', { 'datepat': patAnalCal.datepat|date('Y-m-d') }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('patanalcal_edit', { 'datepat': patAnalCal.datepat|date('Y-m-d') }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('patanalcal_new') }}">Create a new patAnalCal</a>
+        </li>
+    </ul>
+{% endblock %}

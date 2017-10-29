@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Elements list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nomelem</th>
+                <th>Numelem</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for element in elements %}
+            <tr>
+                <td><a href="{{ path('element_show', { 'numelem': element.numelem }) }}">{{ element.nomelem }}</a></td>
+                <td>{{ element.numelem }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('element_show', { 'numelem': element.numelem }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('element_edit', { 'numelem': element.numelem }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('element_new') }}">Create a new element</a>
+        </li>
+    </ul>
+{% endblock %}

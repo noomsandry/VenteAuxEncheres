@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Prelevement</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Dateheureprelev</th>
+                <td>{% if prelevement.dateheureprelev %}{{ prelevement.dateheureprelev|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Dateheurearriv</th>
+                <td>{% if prelevement.dateheurearriv %}{{ prelevement.dateheurearriv|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Numprelev</th>
+                <td>{{ prelevement.numprelev }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('prelevement_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('prelevement_edit', { 'numprelev': prelevement.numprelev }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

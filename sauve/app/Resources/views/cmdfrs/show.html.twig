@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Cmdfr</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Datecmdfrs</th>
+                <td>{% if cmdfr.datecmdfrs %}{{ cmdfr.datecmdfrs|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Numcmdfrs</th>
+                <td>{{ cmdfr.numcmdfrs }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('cmdfrs_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('cmdfrs_edit', { 'numcmdfrs': cmdfr.numcmdfrs }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
